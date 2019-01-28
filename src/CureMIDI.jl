@@ -1,6 +1,6 @@
 module CureMIDI
 
-import fluidsynth
+import FluidSynth
 import SampledSignals
 import MIDI
 
@@ -14,14 +14,14 @@ Synthesize a block of 16 bit audio samples to audio buffers.
 """
 function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, sound_font::AbstractString)
 
-    settings = fluidsynth.Settings()
-    synth = fluidsynth.Synth(settings)
+    settings = FluidSynth.Settings()
+    synth = FluidSynth.Synth(settings)
     # settings
-    fluidsynth.set_sample_rate(synth, Float32(sample_rate))
+    FluidSynth.set_sample_rate(synth, Float32(sample_rate))
 
     # load sound font
-    sfont_id = fluidsynth.sfload(synth, sound_font)
-    fluidsynth.program_select(synth, Int32(0), sfont_id, Int32(0), Int32(0))
+    sfont_id = FluidSynth.sfload(synth, sound_font)
+    FluidSynth.program_select(synth, Int32(0), sfont_id, Int32(0), Int32(0))
 
     # allocate full buffer
     full_ticks = 0
@@ -43,12 +43,12 @@ function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, 
         channel = Int32(note.channel)
         pitch = Int32(note.pitch)
         velocity = Int32(note.velocity)
-        fluidsynth.noteon(synth, channel, pitch, velocity)
+        FluidSynth.noteon(synth, channel, pitch, velocity)
         start_frames = ticks_to_frames(note.position, tpq, bpm, sample_rate)
         duration_frames = ticks_to_frames(note.duration, tpq, bpm, sample_rate)
 
-        fluidsynth.write_float(synth, Int32(duration_frames), left_note_buf, Int32(start_frames) , Int32(1), right_note_buf, Int32(start_frames), Int32(1))
-        fluidsynth.noteoff(synth, channel, pitch)
+        FluidSynth.write_float(synth, Int32(duration_frames), left_note_buf, Int32(start_frames) , Int32(1), right_note_buf, Int32(start_frames), Int32(1))
+        FluidSynth.noteoff(synth, channel, pitch)
 
         left_full_buf += left_note_buf
         right_full_buf += right_note_buf

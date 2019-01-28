@@ -4,10 +4,10 @@ authors = ["YuK_Ota <whitenightwinter@gmail.com>"]
 version = "0.1.0"
 
 [deps]
+FluidSynth = "7b5f247c-b83c-11e8-2667-b92b55f05ea5"
 MIDI = "f57c4921-e30c-5f49-b073-3f2f2ada663e"
 PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 RingBuffers = "f6d8bcc6-4e01-5431-93c4-9d6004abab90"
 SampledSignals = "bd7594eb-a658-542f-9e75-4c4d8908c167"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-fluidsynth = "7b5f247c-b83c-11e8-2667-b92b55f05ea5"
