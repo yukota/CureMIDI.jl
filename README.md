@@ -12,6 +12,14 @@ build RingBuffers
 build PortAudio
 ```
 
+### Install FluidSynth.jl
+CureMIDI.jl depends on FluidSynth.jl  
+FluidSynth.jl don't regisered in METADATA.  
+Please install it manually.
+```
+add https://github.com/yukota/FluidSynth.jl
+```
+
 ### Install CureMIDI.jl
 In Pkg REPL-mode.
 ```
