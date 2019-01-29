@@ -74,11 +74,11 @@ version = "0.5.3"
 
 [[FluidSynth]]
 deps = ["BinDeps", "Homebrew", "Libdl", "Test"]
-git-tree-sha1 = "2fe916c4b002b2c44962e74bcfdb49656c529694"
+git-tree-sha1 = "ee6539c658a83354dc547a4820dfdaf0feada24b"
 repo-rev = "master"
 repo-url = "https://github.com/yukota/FluidSynth.jl.git"
 uuid = "7b5f247c-b83c-11e8-2667-b92b55f05ea5"
-version = "0.1.0"
+version = "0.1.1"
 
 [[HTTPClient]]
 deps = ["Compat", "LibCURL"]
