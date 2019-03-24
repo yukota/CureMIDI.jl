@@ -48,7 +48,12 @@ function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, 
         duration_frames = ticks_to_frames(note.duration, tpq, bpm, sample_rate)
 
         FluidSynth.write_float(synth, Int32(duration_frames), left_note_buf, Int32(start_frames) , Int32(1), right_note_buf, Int32(start_frames), Int32(1))
-        FluidSynth.noteoff(synth, channel, pitch)
+        try
+            FluidSynth.noteoff(synth, channel, pitch)
+        catch
+            # sometimes, noteoff fail.
+            # But not affect playing. so ignore error.
+        end
 
         left_full_buf += left_note_buf
         right_full_buf += right_note_buf
