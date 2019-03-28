@@ -1,0 +1,10 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+FluidSynth = "7b5f247c-b83c-11e8-2667-b92b55f05ea5"
+MIDI = "f57c4921-e30c-5f49-b073-3f2f2ada663e"
+PortAudio = "80ea8bcb-4634-5cb3-8ee8-a132660d1d2d"
+RingBuffers = "f6d8bcc6-4e01-5431-93c4-9d6004abab90"
+SampledSignals = "bd7594eb-a658-542f-9e75-4c4d8908c167"
+
+[compat]
+Documenter = "~0.20"

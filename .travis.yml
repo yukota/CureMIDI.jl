@@ -1,0 +1,22 @@
+language: julia
+os:
+  - linux
+  - osx
+julia:
+  - 1.1
+notifications:
+  email: false
+addons:
+  apt:
+    packages:
+      - libfluidsynth-dev
+
+jobs:
+  include:
+    - stage: "Documentation"
+      julia: 1.1
+      os: linux
+      script:
+        - julia --project=docs/ docs/setup.jl
+        - julia --project=docs/ docs/make.jl
+      after_success: skip
