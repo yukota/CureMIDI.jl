@@ -42,4 +42,4 @@ sampled_buf = synth(track, tpq, bpm, sample_rate, "violin_sample.sf2")
 ```
 
 # Documentation
-documentation page: 
+documentation page: https://yukota.github.io/CureMIDI.jl/dev/
