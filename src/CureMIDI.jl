@@ -5,6 +5,7 @@ import SampledSignals
 import MIDI
 
 export synth
+export tick_to_ms
 
 """
 Synthesize a block of 16 bit audio samples to audio buffers.
@@ -29,14 +30,14 @@ function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, 
         full_ticks = max(full_ticks, note.position + note.duration)
     end
 
-    full_frames = ticks_to_frames(full_ticks, tpq, bpm, sample_rate)
+    full_frames = tick_to_frame(full_ticks, tpq, bpm, sample_rate)
     left_full_buf = zeros(Float32, full_frames)
     right_full_buf = zeros(Float32, full_frames)
 
     left_note_buf = zeros(Float32, full_frames)
     right_note_buf = zeros(Float32, full_frames)
     for note in MIDI.getnotes(track)
-        note_frames = ticks_to_frames(note.position, tpq, bpm, sample_rate)
+        note_frames = tick_to_frame(note.position, tpq, bpm, sample_rate)
         fill!(left_note_buf, 0)
         fill!(right_note_buf, 0)
 
@@ -65,12 +66,21 @@ function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, 
 end
 
 # support functions
-function ticks_to_frames(ticks::UInt, tpq::Int16, bpm::Real, sample_rate::Real)
+function tick_to_frame(tick::UInt, tpq::Int16, bpm::Real, sample_rate::Real)
     ms_per_tick = MIDI.ms_per_tick(tpq, bpm)
     full_ms = ms_per_tick * ticks
     frames = sample_rate * full_ms / 1000
     return UInt(ceil(frames))
 end
 
-
+"""
+Convert from tick to millisecond.
+# Arguments
+- 'tick::Uint' : ticks.
+- `tpq::Int16` :  Ticks per quarter note.
+- `bpm::Real` : Beat per min. Beat means quater notes in this library.
+"""
+function tick_to_ms(tick::UInt, tpq::Int16, bpm::Real)
+    ms_per_tick = MIDI.ms_per_tick(tpq, bpm)
+    return  UInt(ceil(ms / ms_per_tick)
 end #module
