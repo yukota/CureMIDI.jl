@@ -10,8 +10,11 @@ export tick_to_ms
 """
 Synthesize a block of 16 bit audio samples to audio buffers.
 # Arguments
-- `len` : Count of audio frames to synthesize
-- `bps` : Beat per seconds. Beat means quater notes in this library.
+- `track::MIDI.MIDITrack`
+- `tpq::Int16`
+- 'bpm::Real'
+- 'sample_rate::Real'
+- 'sound_font::AbstractString'
 """
 function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, sound_font::AbstractString)
 
@@ -45,8 +48,8 @@ function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, 
         pitch = Int32(note.pitch)
         velocity = Int32(note.velocity)
         FluidSynth.noteon(synth, channel, pitch, velocity)
-        start_frames = ticks_to_frames(note.position, tpq, bpm, sample_rate)
-        duration_frames = ticks_to_frames(note.duration, tpq, bpm, sample_rate)
+        start_frames = tick_to_frame(note.position, tpq, bpm, sample_rate)
+        duration_frames = tick_to_frame(note.duration, tpq, bpm, sample_rate)
 
         FluidSynth.write_float(synth, Int32(duration_frames), left_note_buf, Int32(start_frames) , Int32(1), right_note_buf, Int32(start_frames), Int32(1))
         try
@@ -60,15 +63,15 @@ function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, 
         right_full_buf += right_note_buf
     end
 
-  buf = hcat(left_full_buf, right_full_buf)
-  sampled_buf = SampledSignals.SampleBuf(buf, sample_rate)
-  return sampled_buf
+    buf = hcat(left_full_buf, right_full_buf)
+    sampled_buf = SampledSignals.SampleBuf(buf, sample_rate)
+    return sampled_buf
 end
 
 # support functions
 function tick_to_frame(tick::UInt, tpq::Int16, bpm::Real, sample_rate::Real)
     ms_per_tick = MIDI.ms_per_tick(tpq, bpm)
-    full_ms = ms_per_tick * ticks
+    full_ms = ms_per_tick * tick
     frames = sample_rate * full_ms / 1000
     return UInt(ceil(frames))
 end
@@ -82,5 +85,19 @@ Convert from tick to millisecond.
 """
 function tick_to_ms(tick::UInt, tpq::Int16, bpm::Real)
     ms_per_tick = MIDI.ms_per_tick(tpq, bpm)
-    return  UInt(ceil(ms / ms_per_tick)
+    return  tick * ms_per_tick
+end
+
+"""
+Convert from millisecond to tick.
+# Arguments
+- 'ms::Real' : milliseconds.
+- `tpq::Int16` :  Ticks per quarter note.
+- `bpm::Real` : Beat per min. Beat means quater notes in this library.
+"""
+function ms_to_tick(ms::Real, tpq::Int16, bpm::Real)
+    ms_per_tick = MIDI.ms_per_tick(tpq, bpm)
+    return  ms / ms_per_tick
+end
+
 end #module

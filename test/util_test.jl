@@ -5,4 +5,12 @@ using Revise
 import CureMIDI
 
 
-frames = CureMIDI.ticks_to_frames(UInt(192), Int16(960), 60, 44100)
+ @testset "tick_to_ms test" begin
+    @test CureMIDI.tick_to_ms(UInt(100), Int16(100), 100) == 600
+
+end
+
+@testset "ms_to_tick test" begin
+    @test CureMIDI.ms_to_tick(600, Int16(100), 100) == 100
+
+end
