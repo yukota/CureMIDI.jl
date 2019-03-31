@@ -5,7 +5,7 @@ import SampledSignals
 import MIDI
 
 export synth
-export tick_to_frame, tick_to_ms, ms_to_tick,
+export tick_to_frame, tick_to_ms, ms_to_tick
 
 """
 Synthesize a block of 16 bit audio samples to audio buffers.
