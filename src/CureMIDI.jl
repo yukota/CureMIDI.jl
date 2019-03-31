@@ -69,6 +69,14 @@ function synth(track::MIDI.MIDITrack, tpq::Int16, bpm::Real, sample_rate::Real, 
 end
 
 # support functions
+"""
+Convert from tick to synthsized result buffer index.
+# Arguments
+- 'tick::Uint' : ticks.
+- `tpq::Int16` : Ticks per quarter note.
+- `bpm::Real` : Beat per min. Beat means quater notes in this library.
+- `sample_rate::Real` : Beat per min. Beat means quater notes in this library.
+"""
 function tick_to_frame(tick::UInt, tpq::Int16, bpm::Real, sample_rate::Real)
     ms_per_tick = MIDI.ms_per_tick(tpq, bpm)
     full_ms = ms_per_tick * tick
@@ -80,7 +88,7 @@ end
 Convert from tick to millisecond.
 # Arguments
 - 'tick::Uint' : ticks.
-- `tpq::Int16` :  Ticks per quarter note.
+- `tpq::Int16` : Ticks per quarter note.
 - `bpm::Real` : Beat per min. Beat means quater notes in this library.
 """
 function tick_to_ms(tick::UInt, tpq::Int16, bpm::Real)
@@ -92,7 +100,7 @@ end
 Convert from millisecond to tick.
 # Arguments
 - 'ms::Real' : milliseconds.
-- `tpq::Int16` :  Ticks per quarter note.
+- `tpq::Int16` : Ticks per quarter note.
 - `bpm::Real` : Beat per min. Beat means quater notes in this library.
 """
 function ms_to_tick(ms::Real, tpq::Int16, bpm::Real)
