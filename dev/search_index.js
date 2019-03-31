@@ -33,11 +33,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "reference/#CureMIDI.tick_to_frame",
+    "page": "Reference",
+    "title": "CureMIDI.tick_to_frame",
+    "category": "function",
+    "text": "Convert from tick to synthsized result buffer index.\n\nArguments\n\n\'tick::Uint\' : ticks.\ntpq::Int16 : Ticks per quarter note.\nbpm::Real : Beat per min. Beat means quater notes in this library.\nsample_rate::Real : Beat per min. Beat means quater notes in this library.\n\n\n\n\n\n"
+},
+
+{
     "location": "reference/#CureMIDI.tick_to_ms",
     "page": "Reference",
     "title": "CureMIDI.tick_to_ms",
     "category": "function",
-    "text": "Convert from tick to millisecond.\n\nArguments\n\n\'tick::Uint\' : ticks.\ntpq::Int16 :  Ticks per quarter note.\nbpm::Real : Beat per min. Beat means quater notes in this library.\n\n\n\n\n\n"
+    "text": "Convert from tick to millisecond.\n\nArguments\n\n\'tick::Uint\' : ticks.\ntpq::Int16 : Ticks per quarter note.\nbpm::Real : Beat per min. Beat means quater notes in this library.\n\n\n\n\n\n"
 },
 
 {
@@ -45,7 +53,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Reference",
     "title": "CureMIDI.ms_to_tick",
     "category": "function",
-    "text": "Convert from millisecond to tick.\n\nArguments\n\n\'ms::Real\' : milliseconds.\ntpq::Int16 :  Ticks per quarter note.\nbpm::Real : Beat per min. Beat means quater notes in this library.\n\n\n\n\n\n"
+    "text": "Convert from millisecond to tick.\n\nArguments\n\n\'ms::Real\' : milliseconds.\ntpq::Int16 : Ticks per quarter note.\nbpm::Real : Beat per min. Beat means quater notes in this library.\n\n\n\n\n\n"
 },
 
 {
@@ -53,7 +61,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Reference",
     "title": "Reference",
     "category": "section",
-    "text": "CurrentModule = CureMIDIsynth\ntick_to_ms\nms_to_tick"
+    "text": "CurrentModule = CureMIDIsynth\ntick_to_frame\ntick_to_ms\nms_to_tick"
 },
 
 ]}
